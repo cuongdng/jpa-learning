@@ -7,33 +7,28 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@ToString(exclude = "course")
-public class CourseMaterial {
-
+public class Teacher {
   @Id
   @SequenceGenerator(
-      name = "course_material_sequence",
-      sequenceName = "course_material_sequence",
+      name = "teacher_sequence",
+      sequenceName = "teacher_sequence",
       allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_material_sequence")
-  private Long courseMaterialId;
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacher_sequence")
+  private Long teacherId;
 
-  private String url;
-
-  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "course_id", referencedColumnName = "courseId")
-  private Course course;
+  private String firstName;
+  private String lastName;
 }
